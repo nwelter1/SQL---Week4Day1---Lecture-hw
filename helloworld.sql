@@ -130,9 +130,11 @@ FROM customer
 WHERE last_name = 'William';
 
 -- Question 5
-SELECT staff_id, COUNT(staff_id)
+SELECT staff_id, COUNT(*)
 FROM rental
-GROUP BY staff_id;
+GROUP BY staff_id
+ORDER BY count DESC
+LIMIT 1;
 
 -- Question 6
 SELECT district, COUNT(district) as unique_districts
@@ -144,26 +146,29 @@ GROUP BY district;
 SELECT film_id, COUNT(film_id) as num_actors
 FROM film_actor
 GROUP BY film_id
-ORDER BY num_actors DESC;
+ORDER BY num_actors DESC
+LIMIT 1;
 
 --Question 8
-SELECT store_id, COUNT(last_name)
+SELECT COUNT(last_name)
 FROM customer
 WHERE store_id = 1 and last_name LIKE '%es'
 GROUP BY store_id;
 
 -- Question 9 CANNOT figure this out without getting error in code
 
-SELECT customer_id, COUNT(amount) as new_amount
+SELECT amount, COUNT(rental_id) as rental_count
 FROM payment
 WHERE customer_id BETWEEN 380 and 430
-GROUP BY customer_id
-HAVING COUNT(amount) >250;
+GROUP BY amount
+HAVING COUNT(rental_id) >250;
 
 --Question 10
 SELECT rating, COUNT(rating)
 FROM film
-GROUP BY rating;
+GROUP BY rating
+ORDER BY COUNT(rating) DESC
+LIMIT 1;
 
 SELECT rating, COUNT(title)
 FROM film
